@@ -13,3 +13,10 @@ ESSE É O ARQUIVO BASE PARA A GESTÃO DE ESTOQUE, PARA RODAR O PROJETO SIGA OS P
 6 - Abra o terminal e execute o comando "npm run dev" e abra no navegador na porta 3002: 'http://localhost:3002/login'
 
 7 - insira agora na URl 'http://localhost:3002/users' e crie uma coontaa, após isso descomente aquela linha e faça login com as credenciais inseridas
+
+
+
+
+
+
+![Captura de Tela (81)](https://github.com/user-attachments/assets/7b0b47cd-73c9-4a99-bffd-c50384de60f2)
