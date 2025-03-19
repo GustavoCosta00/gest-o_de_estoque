@@ -19,7 +19,7 @@ routes.get("/login", SessionController.loginForm);
 routes.post("/logout", SessionController.logout);
 routes.post("/session", SessionController.store);
 
-routes.use(middleware);
+// routes.use(middleware);
 
 routes.get("/", (req, res) => {
   return res.render("home/index");

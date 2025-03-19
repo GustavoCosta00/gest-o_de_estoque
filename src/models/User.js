@@ -17,23 +17,26 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pagamento: {
+    type: Boolean,
+    default: false, // Por padrão, o pagamento está pendente
+  },
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
+// Antes de salvar, criptografa a senha se ela foi modificada
 UserSchema.pre("save", async function (next) {
-  // criptografa a senha antes de salvar no bd
   if (!this.isModified("password")) {
-    // se pass não foi modificado
     return next();
   }
-
   this.password = await bcrypt.hash(this.password, 4);
+  next();
 });
 
-// cria um method comparar a senha informada pelo usuario com a senha cryptografada do bd
+// Método para comparar senha informada com a criptografada
 UserSchema.methods = {
   compareHash(password) {
     return bcrypt.compare(password, this.password);

@@ -13,7 +13,7 @@ class SessionController {
   async store(req, resp) {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email }); // recebe o email existende no bd, que no caso é unico
+    const user = await User.findOne({ email }); // Busca o usuário pelo email
 
     if (!user) {
       return resp.render("login/index", {
@@ -23,16 +23,24 @@ class SessionController {
     }
 
     if (!(await user.compareHash(password))) {
-      // se as senhas forem diferentes
+      // Se a senha estiver errada
       return resp.render("login/index", {
         user: req.body,
         error: "Senha incorreta.",
       });
     }
 
-    req.session.userId = user._id;
+    if (!user.pagamento) {
+      // Se o pagamento não estiver em dia
+      return resp.render("login/index", {
+        user: req.body,
+        error: "Pagamento pendente. Regularize sua conta.",
+      });
+    }
 
-    return resp.redirect("/");
+    req.session.userId = user._id; // Cria a sessão do usuário
+
+    return resp.redirect("/"); // Redireciona após o login
   }
 }
 
